@@ -44,17 +44,15 @@ public class Colony {
     }
 
     public void display() {
-        String map = "";
-        for (int x = 0; x < width; x++) {
-            for (int y = 0; y < width; y++) {
-                List<Ant> ants = board.get(new Position(x, y));
-                if (ants.isEmpty()) {
-                    map += "";
-                } else {
-                    map += ants.get(0).getSymbol();
-                }
+        StringBuilder map = new StringBuilder();
+        for (int y = 0; y < width; y++) {
+            for (int x = 0; x < width; x++) {
+                List<Ant> ants = board.getOrDefault(new Position(x, y), Collections.emptyList());
+                map.append(ants.isEmpty() ? " " : ants.get(0).getSymbol());
             }
+            map.append("\n");
         }
+        System.out.println(map);
     }
 
     private void generateAnts(int ants, AntType type) {
