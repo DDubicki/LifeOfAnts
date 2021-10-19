@@ -7,8 +7,6 @@ import java.util.*;
 
 public class Colony {
 
-    private final Random random;
-
     private final int width;
     private Map<Position, List<Ant>> board;
     private List<Ant> allAnts;
@@ -16,7 +14,6 @@ public class Colony {
     public Colony(int width) {
         this.width = width;
         this.board = new HashMap<>();
-        this.random = new Random();
         this.allAnts = new ArrayList<>();
         createQueen(width);
     }
@@ -48,9 +45,10 @@ public class Colony {
         for (int y = 0; y < width; y++) {
             for (int x = 0; x < width; x++) {
                 List<Ant> ants = board.getOrDefault(new Position(x, y), Collections.emptyList());
-                map.append(ants.isEmpty() ? " " : ants.get(0).getSymbol());
+                map.append(ants.isEmpty() ? "_" : ants.get(0).getSymbol());
+                map.append(" ");
             }
-            map.append("\n");
+            map.append("|\n");
         }
         System.out.println(map);
     }
@@ -82,8 +80,8 @@ public class Colony {
     }
 
     private Position generatePosition() {
-        int x = random.nextInt(width);
-        int y = random.nextInt(width);
+        int x = RandomHelper.nextInt(width);
+        int y = RandomHelper.nextInt(width);
         return new Position(x, y);
     }
 }
