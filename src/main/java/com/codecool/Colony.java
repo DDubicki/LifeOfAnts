@@ -11,11 +11,13 @@ public class Colony {
 
     private final int width;
     private Map<Position, List<Ant>> board;
+    private List<Ant> allAnts;
 
     public Colony(int width) {
         this.width = width;
         this.board = new HashMap<>();
         this.random = new Random();
+        this.allAnts = new ArrayList<>();
         createQueen(width);
     }
 
@@ -24,7 +26,9 @@ public class Colony {
 
         List<Ant> antsAtQueenPosition = new ArrayList<>();
         antsAtQueenPosition.add(queen);
+
         board.put(queen.getPosition(), antsAtQueenPosition);
+        allAnts.add(queen);
     }
 
     public void generateAnts(int dronesNumber, int workersNumber, int soldiersNumber) {
@@ -34,10 +38,23 @@ public class Colony {
     }
 
     public void update() {
-
+        for (Ant ant : allAnts) {
+            ant.act();
+        }
     }
 
     public void display() {
+        String map = "";
+        for (int x = 0; x < width; x++) {
+            for (int y = 0; y < width; y++) {
+                List<Ant> ants = board.get(new Position(x, y));
+                if (ants.isEmpty()) {
+                    map += "";
+                } else {
+                    map += ants.get(0).getSymbol();
+                }
+            }
+        }
     }
 
     private void generateAnts(int ants, AntType type) {
@@ -49,6 +66,7 @@ public class Colony {
             antsAtThisPosition.add(ant);
 
             board.put(antPosition, antsAtThisPosition);
+            allAnts.add(ant);
         }
     }
 

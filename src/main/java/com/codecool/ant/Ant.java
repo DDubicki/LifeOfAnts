@@ -4,13 +4,15 @@ import com.codecool.geometry.Position;
 
 public abstract class Ant {
 
+    private final char symbol;
     private Position position;
 
-    public Ant(Position position) {
+    public Ant(Position position, char symbol) {
         this.position = position;
+        this.symbol = symbol;
     }
 
-    public abstract void move();
+    public abstract void act();
 
     public Position getPosition() {
         return position;
@@ -18,5 +20,9 @@ public abstract class Ant {
 
     public void setPosition(Position position) {
         this.position = position;
+    }
+
+    public char getSymbol() {
+        return symbol;
     }
 }
