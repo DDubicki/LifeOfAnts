@@ -17,18 +17,10 @@ public class Drone extends Ant {
 
     @Override
     public void act(int width) {
-        /**
-         * Drones move one step closer to the queen.
-         * If they reach the queen's position, they are kicked off in one of the four directions (chosen randomly),
-         * to the edge of the colony (so width / 2 steps away.)
-         * Ignore mating for now.
-         */
         int queenPosition = width / 2;
         int difX = getDifference(queenPosition, getPosition().x);
         int difY = getDifference(queenPosition, getPosition().y);
-
-        currentDirection = currentDirection.getCloserToQueenDirection(difX, difY);
-        position = position.nextPositionInDirection(Objects.requireNonNull(currentDirection));
+        chooseCurrentMove(difX, difY, width);
     }
 
     private int getDifference(int queenPosition, int dronePosition) {
@@ -39,5 +31,30 @@ public class Drone extends Ant {
             differenceInPosition--;
         }
         return differenceInPosition;
+    }
+
+    private void chooseCurrentMove(int difX, int difY, int width) {
+        if (difX == 0 && difY == 0) {
+            kickOfAnt(width);
+        } else {
+            makeMoveCloserToQueen(difX, difY);
+        }
+    }
+
+    private void kickOfAnt(int width) {
+        int positionX = 0;
+        int positionY = 0;
+        currentDirection = Direction.getRandomDirection();
+        if (currentDirection.differenceX == 0)
+            positionY = currentDirection.differenceY == 1 ? width / 2 : -(width / 2);
+        else
+            positionX = currentDirection.differenceX == 1 ? width / 2 : -(width / 2);
+        Position newPosition = new Position(positionX, positionY);
+        setPosition(newPosition);
+    }
+
+    private void makeMoveCloserToQueen(int difX, int difY) {
+        currentDirection = currentDirection.getCloserToQueenDirection(difX, difY);
+        position = position.nextPositionInDirection(Objects.requireNonNull(currentDirection));
     }
 }

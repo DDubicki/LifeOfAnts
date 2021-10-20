@@ -36,6 +36,6 @@ public enum Direction {
                 return value;
             }
         }
-        return null;
+        throw new IllegalArgumentException("There is no direction with such parameters!");
     }
 }
