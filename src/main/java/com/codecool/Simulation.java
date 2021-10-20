@@ -7,7 +7,7 @@ public class Simulation {
     private final Colony colony;
 
     public Simulation() {
-        colony = new Colony(50);
+        colony = new Colony(20);
         colony.generateAnts(5, 10, 15);
     }
 
