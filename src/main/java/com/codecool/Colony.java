@@ -7,15 +7,14 @@ import java.util.*;
 
 public class Colony {
 
-    private final Random random;
-
     private final int width;
     private Map<Position, List<Ant>> board;
+    private List<Ant> allAnts;
 
     public Colony(int width) {
         this.width = width;
         this.board = new HashMap<>();
-        this.random = new Random();
+        this.allAnts = new ArrayList<>();
         createQueen(width);
     }
 
@@ -24,7 +23,9 @@ public class Colony {
 
         List<Ant> antsAtQueenPosition = new ArrayList<>();
         antsAtQueenPosition.add(queen);
+
         board.put(queen.getPosition(), antsAtQueenPosition);
+        allAnts.add(queen);
     }
 
     public void generateAnts(int dronesNumber, int workersNumber, int soldiersNumber) {
@@ -34,10 +35,22 @@ public class Colony {
     }
 
     public void update() {
-
+        for (Ant ant : allAnts) {
+            ant.act(width);
+        }
     }
 
     public void display() {
+        StringBuilder map = new StringBuilder();
+        for (int y = 0; y < width; y++) {
+            for (int x = 0; x < width; x++) {
+                List<Ant> ants = board.getOrDefault(new Position(x, y), Collections.emptyList());
+                map.append(ants.isEmpty() ? "_" : ants.get(0).getSymbol());
+                map.append(" ");
+            }
+            map.append("|\n");
+        }
+        System.out.println(map);
     }
 
     private void generateAnts(int ants, AntType type) {
@@ -49,6 +62,7 @@ public class Colony {
             antsAtThisPosition.add(ant);
 
             board.put(antPosition, antsAtThisPosition);
+            allAnts.add(ant);
         }
     }
 
@@ -66,8 +80,8 @@ public class Colony {
     }
 
     private Position generatePosition() {
-        int x = random.nextInt(width);
-        int y = random.nextInt(width);
+        int x = RandomHelper.nextInt(width);
+        int y = RandomHelper.nextInt(width);
         return new Position(x, y);
     }
 }
