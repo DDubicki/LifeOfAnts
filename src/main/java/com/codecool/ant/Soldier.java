@@ -16,5 +16,6 @@ public class Soldier extends Ant {
     @Override
     public void act() {
         currentDirection = currentDirection.turnLeft();
+        position = position.nextPositionInDirection(currentDirection);
     }
 }

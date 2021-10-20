@@ -12,6 +12,10 @@ public class Position {
         this.y = y;
     }
 
+    public Position nextPositionInDirection(Direction direction) {
+        return new Position(x + direction.differenceX, y + direction.differenceY);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

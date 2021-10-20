@@ -5,7 +5,7 @@ import com.codecool.geometry.Position;
 public abstract class Ant {
 
     private final char symbol;
-    private Position position;
+    protected Position position;
 
     public Ant(Position position, char symbol) {
         this.position = position;
