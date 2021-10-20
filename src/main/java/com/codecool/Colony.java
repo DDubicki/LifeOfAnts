@@ -36,7 +36,7 @@ public class Colony {
 
     public void update() {
         for (Ant ant : allAnts) {
-            ant.act();
+            ant.act(width);
         }
     }
 

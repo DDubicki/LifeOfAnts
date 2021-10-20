@@ -28,4 +28,14 @@ public enum Direction {
         int i = (this.ordinal() - 1 + values.length) % values.length;
         return values[i];
     }
+
+    public Direction getCloserToQueenDirection(int difX, int difY){
+        Direction[] values = values();
+        for (Direction value : values) {
+            if (difX == value.differenceX || difY == value.differenceY) {
+                return value;
+            }
+        }
+        return null;
+    }
 }

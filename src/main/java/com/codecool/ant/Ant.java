@@ -12,7 +12,7 @@ public abstract class Ant {
         this.symbol = symbol;
     }
 
-    public abstract void act();
+    public abstract void act(int width);
 
     public Position getPosition() {
         return position;

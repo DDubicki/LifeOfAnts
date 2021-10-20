@@ -16,7 +16,7 @@ public class Queen extends Ant {
     }
 
     @Override
-    public void act() {
+    public void act(int width) {
         if (goodMoodCountdown > 0)
             goodMoodCountdown--;
     }
