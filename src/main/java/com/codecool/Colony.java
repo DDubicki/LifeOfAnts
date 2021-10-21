@@ -45,7 +45,7 @@ public class Colony {
         for (int y = 0; y < width; y++) {
             for (int x = 0; x < width; x++) {
                 List<Ant> ants = board.getOrDefault(new Position(x, y), Collections.emptyList());
-                map.append(ants.isEmpty() ? "_" : ants.get(0).getSymbol());
+                map.append(ants.isEmpty() ? " " : ants.get(0).getSymbol());
                 map.append(" ");
             }
             map.append("|\n");
