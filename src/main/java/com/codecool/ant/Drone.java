@@ -54,6 +54,9 @@ public class Drone extends Ant {
             positionX = currentDirection.differenceX == 1 ? width / 2 : -(width / 2);
         Position newPosition = new Position(positionX, positionY);
         setPosition(newPosition);
+        if (Queen.isMatingMood()){
+            Queen.setMating();
+        }
     }
 
     private void makeMoveCloserToQueen(int difX, int difY) {

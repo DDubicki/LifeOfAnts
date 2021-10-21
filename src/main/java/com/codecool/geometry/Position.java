@@ -17,7 +17,8 @@ public class Position {
     }
 
     public boolean isOutBoardPosition(int width) {
-        return (x > width) || (y > width);
+        // TODO fix this: can create endless loop. How to fix: make something like drone do - "move closer to Queen"
+        return (x > width) || (y > width) || (x < 0) || (y < 0);
     }
 
     @Override
