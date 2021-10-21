@@ -15,9 +15,11 @@ public class Worker extends Ant {
 
     @Override
     public void act(int width) {
-        do {
+        if ((getPosition().x > width) || (getPosition().x < 0) || (getPosition().y > width) || (getPosition().y < 0)) {
+            position.nextPositionInDirection(currentDirection.turnBack());
+        } else {
             currentDirection = Direction.getRandomDirection();
             position = position.nextPositionInDirection(currentDirection);
-        } while (position.isOutBoardPosition(width));
+        }
     }
 }

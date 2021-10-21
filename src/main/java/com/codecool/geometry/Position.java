@@ -16,11 +16,6 @@ public class Position {
         return new Position(x + direction.differenceX, y + direction.differenceY);
     }
 
-    public boolean isOutBoardPosition(int width) {
-        // TODO fix this: can create endless loop. How to fix: make something like drone do - "move closer to Queen"
-        return (x > width) || (y > width) || (x < 0) || (y < 0);
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

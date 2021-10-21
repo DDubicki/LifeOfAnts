@@ -29,6 +29,13 @@ public enum Direction {
         return values[i];
     }
 
+    public Direction turnBack() {
+        Direction[] values = values();
+//        int i = this.ordinal() + 2 % values.length;
+        int i = (this.ordinal() - 2 + values.length) % values.length;
+        return values[i];
+    }
+
     public Direction getCloserToQueenDirection(int difX, int difY){
         Direction[] values = values();
         for (Direction value : values) {

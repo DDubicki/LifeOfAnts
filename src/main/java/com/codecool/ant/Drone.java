@@ -26,8 +26,10 @@ public class Drone extends Ant {
 
         if ((absDifferenceToQueenPositionX == 0 && absDifferenceToQueenPositionY == 1) || (absDifferenceToQueenPositionX == 1 && absDifferenceToQueenPositionY == 0)) {
             standNearToQueen(width);
+        } else if ((getPosition().x > width) || (getPosition().x < 0) || (getPosition().y > width) || (getPosition().y < 0)) {
+            position.nextPositionInDirection(currentDirection.turnBack());
         } else {
-            makeMove(queenPosition, width);
+            makeMove(queenPosition);
         }
     }
 
@@ -55,21 +57,18 @@ public class Drone extends Ant {
         currentDirection = Direction.getRandomDirection();
         if (currentDirection.differenceX == 0) {
             positionY = currentDirection.differenceY == 1 ? width / 2 : -(width / 2);
-        }
-        else {
+        } else {
             positionX = currentDirection.differenceX == 1 ? width / 2 : -(width / 2);
         }
         Position newPosition = new Position(positionX, positionY);
         setPosition(newPosition);
     }
 
-    private void makeMove(int queenPosition, int width) {
+    private void makeMove(int queenPosition) {
         int difX = getDifference(queenPosition, getPosition().x);
         int difY = getDifference(queenPosition, getPosition().y);
-        do {
-            currentDirection = currentDirection.getCloserToQueenDirection(difX, difY);
-            position = position.nextPositionInDirection(Objects.requireNonNull(currentDirection));
-        } while (position.isOutBoardPosition(width));
+        currentDirection = currentDirection.getCloserToQueenDirection(difX, difY);
+        position = position.nextPositionInDirection(Objects.requireNonNull(currentDirection));
     }
 
     private int getDifference(int queenPosition, int dronePosition) {
