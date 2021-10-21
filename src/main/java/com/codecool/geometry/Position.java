@@ -16,6 +16,10 @@ public class Position {
         return new Position(x + direction.differenceX, y + direction.differenceY);
     }
 
+    public boolean isOutBoardPosition(int width) {
+        return (x > width) || (y > width);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

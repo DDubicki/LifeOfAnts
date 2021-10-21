@@ -6,7 +6,7 @@ import com.codecool.geometry.Position;
 public class Worker extends Ant {
 
     public static final char WORKER_SYMBOL = 'W';
-    private final Direction currentDirection;
+    private Direction currentDirection;
 
     public Worker(Position position) {
         super(position, WORKER_SYMBOL);
@@ -15,6 +15,9 @@ public class Worker extends Ant {
 
     @Override
     public void act(int width) {
-        position = position.nextPositionInDirection(currentDirection);
+        do {
+            currentDirection = Direction.getRandomDirection();
+            position = position.nextPositionInDirection(currentDirection);
+        } while (position.isOutBoardPosition(width));
     }
 }

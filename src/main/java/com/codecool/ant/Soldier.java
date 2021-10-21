@@ -15,7 +15,9 @@ public class Soldier extends Ant {
 
     @Override
     public void act(int width) {
-        currentDirection = currentDirection.turnLeft();
-        position = position.nextPositionInDirection(currentDirection);
+        do {
+            currentDirection = currentDirection.turnLeft();
+            position = position.nextPositionInDirection(currentDirection);
+        } while (position.isOutBoardPosition(width));
     }
 }

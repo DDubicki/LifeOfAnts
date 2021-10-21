@@ -34,10 +34,13 @@ public class Drone extends Ant {
     }
 
     private void chooseCurrentMove(int difX, int difY, int width) {
+
         if (difX == 0 && difY == 0) {
             kickOfAnt(width);
         } else {
-            makeMoveCloserToQueen(difX, difY);
+            do {
+                makeMoveCloserToQueen(difX, difY);
+            } while (position.isOutBoardPosition(width));
         }
     }
 
